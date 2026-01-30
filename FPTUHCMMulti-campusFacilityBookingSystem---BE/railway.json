@@ -1,11 +1,10 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "dotnet publish Controller/Controller.csproj -c Release -o ./publish"
+    "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "dotnet Controller/publish/Controller.dll",
+    "startCommand": "dotnet out/Controller.dll",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }
