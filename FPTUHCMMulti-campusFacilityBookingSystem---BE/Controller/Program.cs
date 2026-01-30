@@ -15,10 +15,27 @@ var builder = WebApplication.CreateBuilder(args);
 // Support Railway DATABASE_URL (PostgreSQL) or appsettings.json DefaultConnection (SQL Server)
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+// Debug logging
+Console.WriteLine("=== DATABASE CONNECTION DEBUG ===");
+Console.WriteLine($"DATABASE_URL from Environment: {(string.IsNullOrEmpty(databaseUrl) ? "NULL/EMPTY" : $"EXISTS (length: {databaseUrl.Length})")}");
+Console.WriteLine($"DefaultConnection from Config: {(string.IsNullOrEmpty(connectionString) ? "NULL/EMPTY" : $"EXISTS (length: {connectionString.Length})")}");
+
+// Also try getting from configuration (Railway might inject it differently)
+var databaseUrlFromConfig = builder.Configuration["DATABASE_URL"];
+Console.WriteLine($"DATABASE_URL from Configuration: {(string.IsNullOrEmpty(databaseUrlFromConfig) ? "NULL/EMPTY" : $"EXISTS (length: {databaseUrlFromConfig.Length})")}");
+
+// Use whichever is available
+databaseUrl = databaseUrl ?? databaseUrlFromConfig;
 var usePostgres = !string.IsNullOrEmpty(databaseUrl);
+
+Console.WriteLine($"Using PostgreSQL: {usePostgres}");
 
 // Railway provides DATABASE_URL for PostgreSQL, use it if available; otherwise use SQL Server
 var finalConnectionString = usePostgres ? databaseUrl : connectionString;
+
+Console.WriteLine($"Final connection string: {(string.IsNullOrEmpty(finalConnectionString) ? "NULL/EMPTY" : $"EXISTS (length: {finalConnectionString.Length})")}");
+Console.WriteLine("=== END DEBUG ===");
 
 if (string.IsNullOrEmpty(finalConnectionString))
 {
