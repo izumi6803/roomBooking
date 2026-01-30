@@ -1,0 +1,60 @@
+## --- Build & Object Files (Quan trọng nhất) ---
+# Các thư mục chứa code đã biên dịch, không nên đưa lên git vì làm nặng repo
+[Bb]in/
+[Oo]bj/
+
+## --- Visual Studio & IDE Specifics ---
+# File cấu hình riêng của từng máy developer
+.vs/
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+## --- Dependencies & Nuget ---
+# Các gói thư viện sẽ được restore tự động, không cần commit
+*.nupkg
+*.snupkg
+packages/
+!packages/build/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## --- ASP.NET Core & Environment ---
+# ĐÃ SỬA: Cho phép push tất cả file appsettings (kể cả Development và Local)
+# appsettings.Development.json (Đã xóa dòng chặn này)
+# appsettings.Local.json (Đã xóa dòng chặn này)
+# secrets.json (Đã xóa dòng chặn này)
+
+# File biến môi trường (nếu dùng thư viện DotEnv) - Nếu muốn push cả .env thì xóa nốt dòng dưới
+.env
+
+## --- Logs & Diagnostics ---
+*.log
+*.dump
+
+## --- Operating System Files ---
+.DS_Store
+Thumbs.db
+
+## --- Test Results ---
+TestResults/
+*.trx
+coverage.json
+*.cobertura.xml
+*.md
+Controller/appsettings.json
+/node_modules
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+.github/workflows/playwright.yml
+playwright.config.ts

@@ -1,0 +1,3 @@
+web: dotnet Controller/publish/Controller.dll
+
+

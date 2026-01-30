@@ -1,0 +1,18 @@
+[phases.setup]
+nixPkgs = ["dotnet-sdk_8"]
+
+[phases.install]
+cmds = [
+  "dotnet restore",
+  "dotnet build --configuration Release"
+]
+
+[phases.build]
+cmds = [
+  "dotnet publish Controller/Controller.csproj --configuration Release --output ./publish --no-restore"
+]
+
+[start]
+cmd = "dotnet Controller/publish/Controller.dll"
+
+

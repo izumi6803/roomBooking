@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* Preline UI */
+@import "preline/variants.css";
+@source "../node_modules/preline/dist/*.js";
+
+/* ============================================
+   FPTU Facility Booking System Theme
+   ============================================ */
+
+/* Color Palette */
+:root {
+  /* Primary Colors - Orange */
+  --color-primary: #f97316; /* orange-500 */
+  --color-primary-hover: #ea580c; /* orange-600 */
+  --color-primary-light: #fb923c; /* orange-400 */
+  --color-primary-dark: #c2410c; /* orange-700 */
+  --color-primary-bg: #fff7ed; /* orange-50 */
+  
+  /* Secondary Colors - Purple */
+  --color-secondary: #9333ea; /* purple-600 */
+  --color-secondary-dark: #7e22ce; /* purple-700 */
+  
+  /* Gradient */
+  --gradient-primary: linear-gradient(to bottom right, #f97316, #ea580c, #9333ea);
+  
+  /* Neutral Colors */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Status Colors */
+  --color-success: #10b981; /* green-500 */
+  --color-success-bg: #d1fae5; /* green-100 */
+  --color-success-text: #065f46; /* green-700 */
+  
+  --color-error: #ef4444; /* red-500 */
+  --color-error-bg: #fee2e2; /* red-100 */
+  --color-error-text: #991b1b; /* red-700 */
+  
+  --color-warning: #f59e0b; /* amber-500 */
+  --color-warning-bg: #fef3c7; /* amber-100 */
+  --color-warning-text: #92400e; /* amber-700 */
+  
+  --color-info: #3b82f6; /* blue-500 */
+  --color-info-bg: #dbeafe; /* blue-100 */
+  --color-info-text: #1e40af; /* blue-700 */
+  
+  /* Role Colors */
+  --color-student: #3b82f6; /* blue-500 */
+  --color-student-bg: #dbeafe; /* blue-100 */
+  --color-student-text: #1e40af; /* blue-700 */
+  
+  --color-lecturer: #9333ea; /* purple-500 */
+  --color-lecturer-bg: #e9d5ff; /* purple-100 */
+  --color-lecturer-text: #6b21a8; /* purple-700 */
+  
+  --color-admin: #ef4444; /* red-500 */
+  --color-admin-bg: #fee2e2; /* red-100 */
+  --color-admin-text: #991b1b; /* red-700 */
+  
+  --color-facility-manager: #10b981; /* green-500 */
+  --color-facility-manager-bg: #d1fae5; /* green-100 */
+  --color-facility-manager-text: #065f46; /* green-700 */
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  
+  /* Border Radius */
+  --radius-sm: 0.5rem; /* 8px */
+  --radius-md: 0.75rem; /* 12px */
+  --radius-lg: 1rem; /* 16px */
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Utility Classes */
+.theme-gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.theme-bg-primary {
+  background-color: var(--color-primary);
+}
+
+.theme-bg-primary-hover:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.theme-text-primary {
+  color: var(--color-primary);
+}
+
+.theme-border-primary {
+  border-color: var(--color-primary);
+}
+
+.theme-ring-primary {
+  --tw-ring-color: var(--color-primary);
+}
+
+.theme-focus-ring:focus {
+  outline: none;
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 0 1px var(--color-primary-light);
+}
+
