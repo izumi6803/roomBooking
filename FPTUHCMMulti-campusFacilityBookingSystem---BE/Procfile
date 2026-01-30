@@ -1,3 +1,0 @@
-web: dotnet out/Controller.dll
-
-
