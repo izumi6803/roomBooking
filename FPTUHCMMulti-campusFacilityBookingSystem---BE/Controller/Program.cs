@@ -12,12 +12,13 @@ using Controller.Filters;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure DbContext
-// Support Railway DATABASE_URL or appsettings.json DefaultConnection
+// Support Railway DATABASE_URL (PostgreSQL) or appsettings.json DefaultConnection (SQL Server)
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+var usePostgres = !string.IsNullOrEmpty(databaseUrl);
 
-// Railway provides DATABASE_URL, use it if available; otherwise use DefaultConnection
-var finalConnectionString = !string.IsNullOrEmpty(databaseUrl) ? databaseUrl : connectionString;
+// Railway provides DATABASE_URL for PostgreSQL, use it if available; otherwise use SQL Server
+var finalConnectionString = usePostgres ? databaseUrl : connectionString;
 
 if (string.IsNullOrEmpty(finalConnectionString))
 {
@@ -25,7 +26,16 @@ if (string.IsNullOrEmpty(finalConnectionString))
 }
 
 builder.Services.AddDbContext<FacilityBookingDbContext>(options =>
-    options.UseSqlServer(finalConnectionString));
+{
+    if (usePostgres)
+    {
+        options.UseNpgsql(finalConnectionString);
+    }
+    else
+    {
+        options.UseSqlServer(finalConnectionString);
+    }
+});
 
 // Register Repositories
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
