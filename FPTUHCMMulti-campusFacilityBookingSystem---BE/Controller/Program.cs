@@ -189,6 +189,23 @@ builder.Services.AddAutoMapper(typeof(Applications.Mappers.MappingProfile));
 
 var app = builder.Build();
 
+// Apply database migrations automatically on startup (for Railway deployment)
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<FacilityBookingDbContext>();
+    try
+    {
+        Console.WriteLine("Applying database migrations...");
+        dbContext.Database.Migrate();
+        Console.WriteLine("Database migrations applied successfully!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error applying migrations: {ex.Message}");
+        throw;
+    }
+}
+
 // Configure port for Railway/production deployment
 var port = Environment.GetEnvironmentVariable("PORT");
 if (!string.IsNullOrEmpty(port))
