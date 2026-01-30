@@ -26,6 +26,10 @@ namespace DAL.Dbcontext
         {
             base.OnModelCreating(modelBuilder);
 
+            // Determine database provider for SQL syntax differences
+            var isPostgreSQL = Database.IsNpgsql();
+            var utcNowSql = isPostgreSQL ? "NOW() AT TIME ZONE 'UTC'" : "GETUTCDATE()";
+
             // ====================
             // ROLE CONFIGURATION
             // ====================
@@ -43,10 +47,10 @@ namespace DAL.Dbcontext
                     .IsRequired();
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnName("updated_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
 
                 // Seed data: 3 roles cố định
                 entity.HasData(
@@ -90,10 +94,10 @@ namespace DAL.Dbcontext
                     .HasDefaultValue(CampusStatus.Active);
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnName("updated_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
 
                 // Indexes
                 entity.HasIndex(e => e.Name).IsUnique();
@@ -146,10 +150,10 @@ namespace DAL.Dbcontext
                     .HasColumnType("nvarchar(MAX)");
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnName("updated_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
                 entity.Property(e => e.Status)
                     .HasColumnName("status")
                     .HasConversion<string>()
@@ -229,10 +233,10 @@ namespace DAL.Dbcontext
                     .HasColumnName("password_reset_code_expiry");
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnName("updated_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
 
                 // Indexes
                 entity.HasIndex(e => e.Email).IsUnique();
@@ -339,10 +343,10 @@ namespace DAL.Dbcontext
                     .HasDefaultValue(1);
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnName("updated_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
 
                 // Foreign Keys
                 entity.HasOne(f => f.Campus)
@@ -467,10 +471,10 @@ namespace DAL.Dbcontext
                     .HasColumnType("nvarchar(MAX)");
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnName("updated_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
 
                 // Foreign Keys
                 entity.HasOne(b => b.User)
@@ -628,10 +632,10 @@ namespace DAL.Dbcontext
                     .HasColumnType("nvarchar(MAX)");
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnName("updated_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
 
                 // Indexes
                 entity.HasIndex(e => e.SettingKey).IsUnique();
