@@ -3,8 +3,8 @@ using System;
 using DAL.Dbcontext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,123 +18,123 @@ namespace DAL.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.11")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("DAL.Models.Booking", b =>
                 {
                     b.Property<string>("BookingId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("booking_id");
 
                     b.Property<DateTime?>("ApprovedAt")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("approved_at");
 
                     b.Property<string>("ApprovedBy")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("approved_by");
 
                     b.Property<string>("CancellationReason")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("cancellation_reason");
 
                     b.Property<DateTime?>("CancelledAt")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("cancelled_at");
 
                     b.Property<string>("Category")
                         .HasMaxLength(100)
-                        
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("category");
 
                     b.Property<string>("CheckInImages")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("check_in_images");
 
                     b.Property<string>("CheckInNote")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("check_in_note");
 
                     b.Property<DateTime?>("CheckInTime")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("check_in_time");
 
                     b.Property<string>("CheckOutImages")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("check_out_images");
 
                     b.Property<string>("CheckOutNote")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("check_out_note");
 
                     b.Property<DateTime?>("CheckOutTime")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("check_out_time");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("end_time");
 
                     b.Property<int?>("EstimatedAttendees")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("estimated_attendees");
 
                     b.Property<string>("FacilityId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("facility_id");
 
                     b.Property<bool>("IsUsed")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasDefaultValue(false)
                         .HasColumnName("is_used");
 
                     b.Property<string>("Purpose")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("purpose");
 
                     b.Property<string>("RejectionReason")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("rejection_reason");
 
                     b.Property<string>("SpecialRequirements")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("special_requirements");
 
                     b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("start_time");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        
+                        .HasColumnType("character varying(50)")
                         .HasDefaultValue("Pending_Approval")
                         .HasColumnName("status");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("user_id");
 
                     b.HasKey("BookingId");
@@ -152,47 +152,47 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("FeedbackId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("feedback_id");
 
                     b.Property<string>("BookingId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("booking_id");
 
                     b.Property<string>("Comments")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("comments");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<string>("IssueDescription")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("issue_description");
 
                     b.Property<int>("Rating")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("rating");
 
                     b.Property<bool>("ReportIssue")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasDefaultValue(false)
                         .HasColumnName("report_issue");
 
                     b.Property<DateTime?>("ResolvedAt")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("resolved_at");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("user_id");
 
                     b.HasKey("FeedbackId");
@@ -209,52 +209,52 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("CampusId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("campus_id");
 
                     b.Property<string>("Address")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("address");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<string>("Email")
                         .HasMaxLength(255)
-                        
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("email");
 
                     b.Property<string>("ImageUrl")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("image_url");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("name");
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(20)
-                        
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("phone_number");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        
+                        .HasColumnType("character varying(50)")
                         .HasDefaultValue("Active")
                         .HasColumnName("status");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.HasKey("CampusId");
 
@@ -268,23 +268,23 @@ namespace DAL.Migrations
                         {
                             CampusId = "C0001",
                             Address = "Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 220, DateTimeKind.Utc).AddTicks(8714),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 570, DateTimeKind.Utc).AddTicks(6384),
                             Email = "daihocfpt@fpt.edu.vn",
                             Name = "FPTU HCM Campus",
                             PhoneNumber = "028 7300 5588",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 220, DateTimeKind.Utc).AddTicks(8714)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 570, DateTimeKind.Utc).AddTicks(6385)
                         },
                         new
                         {
                             CampusId = "C0002",
                             Address = "Số 1 Lưu Hữu Phước, Đông Hoà, Dĩ An, TP.HCM",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 220, DateTimeKind.Utc).AddTicks(8717),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 570, DateTimeKind.Utc).AddTicks(6387),
                             Email = "nvhsv@fpt.edu.vn",
                             Name = "Nhà Văn Hóa Sinh Viên",
                             PhoneNumber = "028 7300 5589",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 220, DateTimeKind.Utc).AddTicks(8717)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 570, DateTimeKind.Utc).AddTicks(6388)
                         });
                 });
 
@@ -292,79 +292,79 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("FacilityId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("facility_id");
 
                     b.Property<string>("Amenities")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("amenities");
 
                     b.Property<string>("CampusId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("campus_id");
 
                     b.Property<int>("Capacity")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("capacity");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<string>("Description")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("description");
 
                     b.Property<string>("FacilityManagerId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("facility_manager_id");
 
                     b.Property<string>("FloorNumber")
                         .HasMaxLength(10)
-                        
+                        .HasColumnType("character varying(10)")
                         .HasColumnName("floor_number");
 
                     b.Property<int>("MaxConcurrentBookings")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasDefaultValue(1)
                         .HasColumnName("max_concurrent_bookings");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("name");
 
                     b.Property<string>("RoomNumber")
                         .HasMaxLength(50)
-                        
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("room_number");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        
+                        .HasColumnType("character varying(50)")
                         .HasDefaultValue("Available")
                         .HasColumnName("status");
 
                     b.Property<string>("TypeId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("type_id");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.HasKey("FacilityId");
 
@@ -382,7 +382,7 @@ namespace DAL.Migrations
                             FacilityId = "F00001",
                             CampusId = "C0001",
                             Capacity = 40,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7549),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5775),
                             Description = "Phòng học lý thuyết",
                             FloorNumber = "1",
                             MaxConcurrentBookings = 1,
@@ -390,14 +390,14 @@ namespace DAL.Migrations
                             RoomNumber = "A101",
                             Status = "Available",
                             TypeId = "FT0001",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7549)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5775)
                         },
                         new
                         {
                             FacilityId = "F00002",
                             CampusId = "C0001",
                             Capacity = 40,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7553),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5779),
                             Description = "Phòng học lý thuyết",
                             FloorNumber = "1",
                             MaxConcurrentBookings = 1,
@@ -405,14 +405,14 @@ namespace DAL.Migrations
                             RoomNumber = "A102",
                             Status = "Available",
                             TypeId = "FT0001",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7553)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5780)
                         },
                         new
                         {
                             FacilityId = "F00003",
                             CampusId = "C0001",
                             Capacity = 15,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7555),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5783),
                             Description = "Phòng họp nhỏ",
                             FloorNumber = "2",
                             MaxConcurrentBookings = 1,
@@ -420,14 +420,14 @@ namespace DAL.Migrations
                             RoomNumber = "B201",
                             Status = "Available",
                             TypeId = "FT0002",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7556)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5783)
                         },
                         new
                         {
                             FacilityId = "F00004",
                             CampusId = "C0001",
                             Capacity = 25,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7559),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5785),
                             Description = "Phòng họp vừa",
                             FloorNumber = "2",
                             MaxConcurrentBookings = 1,
@@ -435,14 +435,14 @@ namespace DAL.Migrations
                             RoomNumber = "B202",
                             Status = "Available",
                             TypeId = "FT0002",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7559)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5786)
                         },
                         new
                         {
                             FacilityId = "F00005",
                             CampusId = "C0001",
                             Capacity = 50,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7562),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5788),
                             Description = "Phòng máy 50 máy",
                             FloorNumber = "3",
                             MaxConcurrentBookings = 1,
@@ -450,14 +450,14 @@ namespace DAL.Migrations
                             RoomNumber = "C301",
                             Status = "Available",
                             TypeId = "FT0003",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7562)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5788)
                         },
                         new
                         {
                             FacilityId = "F00006",
                             CampusId = "C0001",
                             Capacity = 50,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7564),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5791),
                             Description = "Phòng máy 50 máy",
                             FloorNumber = "3",
                             MaxConcurrentBookings = 1,
@@ -465,14 +465,14 @@ namespace DAL.Migrations
                             RoomNumber = "C302",
                             Status = "Available",
                             TypeId = "FT0003",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7569)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5798)
                         },
                         new
                         {
                             FacilityId = "F00007",
                             CampusId = "C0001",
                             Capacity = 100,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7571),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5800),
                             Description = "Sân bóng rổ ngoài trời",
                             FloorNumber = "0",
                             MaxConcurrentBookings = 2,
@@ -480,14 +480,14 @@ namespace DAL.Migrations
                             RoomNumber = "Court1",
                             Status = "Available",
                             TypeId = "FT0004",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7572)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5800)
                         },
                         new
                         {
                             FacilityId = "F00008",
                             CampusId = "C0001",
                             Capacity = 80,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7575),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5803),
                             Description = "4 sân cầu lông",
                             FloorNumber = "0",
                             MaxConcurrentBookings = 4,
@@ -495,14 +495,14 @@ namespace DAL.Migrations
                             RoomNumber = "Court2",
                             Status = "Available",
                             TypeId = "FT0004",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7575)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5803)
                         },
                         new
                         {
                             FacilityId = "F00011",
                             CampusId = "C0002",
                             Capacity = 30,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7582),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5898),
                             Description = "Phòng sinh hoạt câu lạc bộ",
                             FloorNumber = "1",
                             MaxConcurrentBookings = 1,
@@ -510,14 +510,14 @@ namespace DAL.Migrations
                             RoomNumber = "N101",
                             Status = "Available",
                             TypeId = "FT0001",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7583)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5900)
                         },
                         new
                         {
                             FacilityId = "F00012",
                             CampusId = "C0002",
                             Capacity = 30,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7585),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5903),
                             Description = "Phòng sinh hoạt câu lạc bộ",
                             FloorNumber = "1",
                             MaxConcurrentBookings = 1,
@@ -525,14 +525,14 @@ namespace DAL.Migrations
                             RoomNumber = "N102",
                             Status = "Available",
                             TypeId = "FT0001",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7585)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5903)
                         },
                         new
                         {
                             FacilityId = "F00013",
                             CampusId = "C0002",
                             Capacity = 15,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7587),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5906),
                             Description = "Phòng họp Ban chủ nhiệm",
                             FloorNumber = "2",
                             MaxConcurrentBookings = 1,
@@ -540,14 +540,14 @@ namespace DAL.Migrations
                             RoomNumber = "N201",
                             Status = "Available",
                             TypeId = "FT0002",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7588)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5907)
                         },
                         new
                         {
                             FacilityId = "F00014",
                             CampusId = "C0002",
                             Capacity = 25,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7590),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5909),
                             Description = "Phòng họp CLB",
                             FloorNumber = "2",
                             MaxConcurrentBookings = 1,
@@ -555,14 +555,14 @@ namespace DAL.Migrations
                             RoomNumber = "N202",
                             Status = "Available",
                             TypeId = "FT0002",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7590)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5909)
                         },
                         new
                         {
                             FacilityId = "F00015",
                             CampusId = "C0002",
                             Capacity = 20,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7593),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5912),
                             Description = "Phòng sản xuất nội dung",
                             FloorNumber = "3",
                             MaxConcurrentBookings = 1,
@@ -570,14 +570,14 @@ namespace DAL.Migrations
                             RoomNumber = "N301",
                             Status = "Available",
                             TypeId = "FT0003",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7593)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5912)
                         },
                         new
                         {
                             FacilityId = "F00016",
                             CampusId = "C0002",
                             Capacity = 25,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7595),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5914),
                             Description = "Phòng tập nhạc, ca hát",
                             FloorNumber = "3",
                             MaxConcurrentBookings = 1,
@@ -585,14 +585,14 @@ namespace DAL.Migrations
                             RoomNumber = "N302",
                             Status = "Available",
                             TypeId = "FT0003",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7595)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5915)
                         },
                         new
                         {
                             FacilityId = "F00017",
                             CampusId = "C0002",
                             Capacity = 200,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7598),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5917),
                             Description = "Sân khấu tổ chức sự kiện",
                             FloorNumber = "0",
                             MaxConcurrentBookings = 1,
@@ -600,14 +600,14 @@ namespace DAL.Migrations
                             RoomNumber = "Stage1",
                             Status = "Available",
                             TypeId = "FT0004",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7598)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5917)
                         },
                         new
                         {
                             FacilityId = "F00018",
                             CampusId = "C0002",
                             Capacity = 50,
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7600),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5919),
                             Description = "Khu vực nướng ngoài trời",
                             FloorNumber = "0",
                             MaxConcurrentBookings = 2,
@@ -615,7 +615,7 @@ namespace DAL.Migrations
                             RoomNumber = "BBQ1",
                             Status = "Available",
                             TypeId = "FT0004",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 583, DateTimeKind.Utc).AddTicks(7600)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 935, DateTimeKind.Utc).AddTicks(5920)
                         });
                 });
 
@@ -623,50 +623,50 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("TypeId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("type_id");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<string>("DefaultAmenities")
-                        ;
+                        .HasColumnType("text");
 
                     b.Property<int?>("DefaultCapacity")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("description");
 
                     b.Property<string>("IconUrl")
-                        ;
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("name");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(20)
-                        
+                        .HasColumnType("character varying(20)")
                         .HasDefaultValue("Active")
                         .HasColumnName("status");
 
                     b.Property<int?>("TypicalDurationHours")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.HasKey("TypeId");
 
@@ -676,38 +676,38 @@ namespace DAL.Migrations
                         new
                         {
                             TypeId = "FT0001",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 221, DateTimeKind.Utc).AddTicks(7123),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 571, DateTimeKind.Utc).AddTicks(4647),
                             Description = "Phòng học lý thuyết",
                             Name = "Phòng học",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 221, DateTimeKind.Utc).AddTicks(7125)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 571, DateTimeKind.Utc).AddTicks(4648)
                         },
                         new
                         {
                             TypeId = "FT0002",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 221, DateTimeKind.Utc).AddTicks(7128),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 571, DateTimeKind.Utc).AddTicks(4685),
                             Description = "Phòng họp",
                             Name = "Phòng họp",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 221, DateTimeKind.Utc).AddTicks(7128)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 571, DateTimeKind.Utc).AddTicks(4686)
                         },
                         new
                         {
                             TypeId = "FT0003",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 221, DateTimeKind.Utc).AddTicks(7130),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 571, DateTimeKind.Utc).AddTicks(4687),
                             Description = "Phòng máy tính",
                             Name = "Phòng máy tính",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 221, DateTimeKind.Utc).AddTicks(7130)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 571, DateTimeKind.Utc).AddTicks(4688)
                         },
                         new
                         {
                             TypeId = "FT0004",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 221, DateTimeKind.Utc).AddTicks(7132),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 571, DateTimeKind.Utc).AddTicks(4689),
                             Description = "Sân thể thao",
                             Name = "Sân thể thao",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 221, DateTimeKind.Utc).AddTicks(7132)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 571, DateTimeKind.Utc).AddTicks(4690)
                         });
                 });
 
@@ -715,62 +715,62 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("NotificationId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("notification_id");
 
                     b.Property<string>("BookingId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("booking_id");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<string>("FeedbackId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("feedback_id");
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        
+                        .HasColumnType("text")
                         .HasColumnName("message");
 
                     b.Property<DateTime?>("ReadAt")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("read_at");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        
+                        .HasColumnType("character varying(50)")
                         .HasDefaultValue("Unread")
                         .HasColumnName("status");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
-                        
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("title");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasMaxLength(50)
-                        
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("type");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("user_id");
 
                     b.Property<string>("UserId1")
-                        ;
+                        .HasColumnType("character varying(6)");
 
                     b.HasKey("NotificationId");
 
@@ -793,26 +793,26 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("RoleId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("role_id");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("role_name");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.HasKey("RoleId");
 
@@ -822,23 +822,23 @@ namespace DAL.Migrations
                         new
                         {
                             RoleId = "RL0001",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 220, DateTimeKind.Utc).AddTicks(6182),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 570, DateTimeKind.Utc).AddTicks(3934),
                             RoleName = "Sinh viên",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 220, DateTimeKind.Utc).AddTicks(6182)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 570, DateTimeKind.Utc).AddTicks(3934)
                         },
                         new
                         {
                             RoleId = "RL0002",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 220, DateTimeKind.Utc).AddTicks(6185),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 570, DateTimeKind.Utc).AddTicks(3936),
                             RoleName = "Giảng viên",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 220, DateTimeKind.Utc).AddTicks(6185)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 570, DateTimeKind.Utc).AddTicks(3937)
                         },
                         new
                         {
                             RoleId = "RL0003",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 220, DateTimeKind.Utc).AddTicks(6186),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 570, DateTimeKind.Utc).AddTicks(3938),
                             RoleName = "Quản trị viên cơ sở vật chất",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 220, DateTimeKind.Utc).AddTicks(6187)
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 570, DateTimeKind.Utc).AddTicks(3938)
                         });
                 });
 
@@ -846,30 +846,30 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("SettingKey")
                         .HasMaxLength(100)
-                        
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("setting_key");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<string>("Description")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("description");
 
                     b.Property<string>("SettingValue")
                         .IsRequired()
                         .HasMaxLength(500)
-                        
+                        .HasColumnType("character varying(500)")
                         .HasColumnName("setting_value");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.HasKey("SettingKey");
 
@@ -883,111 +883,109 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("UserId")
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("user_id");
 
                     b.Property<string>("AvatarUrl")
-                        
+                        .HasColumnType("text")
                         .HasColumnName("avatar_url");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<string>("Email")
                         .HasMaxLength(255)
-                        
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("email");
 
                     b.Property<string>("EmailVerificationCode")
                         .HasMaxLength(10)
-                        
+                        .HasColumnType("character varying(10)")
                         .HasColumnName("email_verification_code");
 
                     b.Property<DateTime?>("EmailVerificationCodeExpiry")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("email_verification_code_expiry");
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(255)
-                        
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("full_name");
 
                     b.Property<string>("IsVerify")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        
+                        .HasColumnType("character varying(50)")
                         .HasDefaultValue("Unverified")
                         .HasColumnName("is_verify");
 
                     b.Property<DateTime?>("LastLogin")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("last_login");
 
                     b.Property<string>("Password")
                         .HasMaxLength(255)
-                        
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("password");
 
                     b.Property<string>("PasswordResetCode")
                         .HasMaxLength(10)
-                        
+                        .HasColumnType("character varying(10)")
                         .HasColumnName("password_reset_code");
 
                     b.Property<DateTime?>("PasswordResetCodeExpiry")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("password_reset_code_expiry");
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(20)
-                        
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("phone_number");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        
+                        .HasColumnType("character varying(6)")
                         .HasColumnName("role_id");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        
+                        .HasColumnType("character varying(50)")
                         .HasDefaultValue("Active")
                         .HasColumnName("status");
 
                     b.Property<string>("StudentId")
                         .HasMaxLength(8)
-                        
+                        .HasColumnType("character varying(8)")
                         .HasColumnName("student_id");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(100)
-                        
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("user_name");
 
                     b.HasKey("UserId");
 
                     b.HasIndex("Email")
-                        .IsUnique()
-                        .HasFilter("[email] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("RoleId");
 
                     b.HasIndex("UserName")
-                        .IsUnique()
-                        .HasFilter("[user_name] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("user", (string)null);
 
@@ -995,40 +993,40 @@ namespace DAL.Migrations
                         new
                         {
                             UserId = "U00001",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 341, DateTimeKind.Utc).AddTicks(9705),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 689, DateTimeKind.Utc).AddTicks(2659),
                             Email = "student@fpt.edu.vn",
                             FullName = "Nguyễn Văn A",
                             IsVerify = "Unverified",
-                            Password = "$2a$11$/T.opwCXsHutn9tkNBpq9.9Vwbn7lim6nlQrPJp5yeXKcSV8c51L2",
+                            Password = "$2a$11$Gd1Ho7C98hbEHDavyPYR.uFXlJq5Qto1Z/Yia0QHSgNGrBaiv9d2.",
                             RoleId = "RL0001",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 341, DateTimeKind.Utc).AddTicks(9716),
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 689, DateTimeKind.Utc).AddTicks(2666),
                             UserName = "studentA"
                         },
                         new
                         {
                             UserId = "U00002",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 463, DateTimeKind.Utc).AddTicks(8390),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 811, DateTimeKind.Utc).AddTicks(1627),
                             Email = "lecturer@fe.edu.vn",
                             FullName = "Trần Thị B",
                             IsVerify = "Unverified",
-                            Password = "$2a$11$f0PePB3BUVUu7fCmQIxN/eg9bsI8w9MNLaxNnA6pVrRo/moby97z2",
+                            Password = "$2a$11$RPLPn4CKfWWlqIhvuzkPmu.tbAdG6rTRTYm7Xsr1rPWaMMNSDoHdO",
                             RoleId = "RL0002",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 463, DateTimeKind.Utc).AddTicks(8396),
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 811, DateTimeKind.Utc).AddTicks(1633),
                             UserName = "lecturerB"
                         },
                         new
                         {
                             UserId = "U00003",
-                            CreatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 581, DateTimeKind.Utc).AddTicks(8644),
+                            CreatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 932, DateTimeKind.Utc).AddTicks(9572),
                             Email = "admin@fpt.edu.vn",
                             FullName = "Quản trị viên hệ thống",
                             IsVerify = "Unverified",
-                            Password = "$2a$11$V/Hh09BV.ttLJnwukFsQ9elRIYmHROS46wYzimjW6hceP7IOwgkR.",
+                            Password = "$2a$11$DJehRtzWQhjVZ3U78nol1eSJ9yf342xyAvx/GsyLSpzfXI4yX78Ha",
                             RoleId = "RL0003",
                             Status = "Active",
-                            UpdatedAt = new DateTime(2026, 2, 5, 1, 44, 27, 581, DateTimeKind.Utc).AddTicks(8649),
+                            UpdatedAt = new DateTime(2026, 2, 5, 1, 54, 16, 932, DateTimeKind.Utc).AddTicks(9581),
                             UserName = "admin"
                         });
                 });
