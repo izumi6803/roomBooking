@@ -31,10 +31,33 @@ var usePostgres = !string.IsNullOrEmpty(databaseUrl);
 
 Console.WriteLine($"Using PostgreSQL: {usePostgres}");
 
-// Railway provides DATABASE_URL for PostgreSQL, use it if available; otherwise use SQL Server
-var finalConnectionString = usePostgres ? databaseUrl : connectionString;
+// Convert Railway DATABASE_URL format (postgresql://user:pass@host:port/db) to Npgsql format
+string? finalConnectionString = null;
+if (usePostgres && !string.IsNullOrEmpty(databaseUrl))
+{
+    try
+    {
+        // Parse the DATABASE_URL
+        var uri = new Uri(databaseUrl);
+        var userInfo = uri.UserInfo.Split(':');
+        
+        // Build Npgsql connection string
+        finalConnectionString = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
+        
+        Console.WriteLine("Successfully converted DATABASE_URL to Npgsql format");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error parsing DATABASE_URL: {ex.Message}");
+        throw new InvalidOperationException("Failed to parse DATABASE_URL. Please check the format.", ex);
+    }
+}
+else
+{
+    finalConnectionString = connectionString;
+}
 
-Console.WriteLine($"Final connection string: {(string.IsNullOrEmpty(finalConnectionString) ? "NULL/EMPTY" : $"EXISTS (length: {finalConnectionString.Length})")}");
+Console.WriteLine($"Final connection string: {(string.IsNullOrEmpty(finalConnectionString) ? "NULL/EMPTY" : "EXISTS")}");
 Console.WriteLine("=== END DEBUG ===");
 
 if (string.IsNullOrEmpty(finalConnectionString))
