@@ -26,7 +26,7 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("BookingId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("booking_id");
 
                     b.Property<DateTime?>("ApprovedAt")
@@ -35,11 +35,11 @@ namespace DAL.Migrations
 
                     b.Property<string>("ApprovedBy")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("approved_by");
 
                     b.Property<string>("CancellationReason")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("cancellation_reason");
 
                     b.Property<DateTime?>("CancelledAt")
@@ -48,15 +48,15 @@ namespace DAL.Migrations
 
                     b.Property<string>("Category")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        
                         .HasColumnName("category");
 
                     b.Property<string>("CheckInImages")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("check_in_images");
 
                     b.Property<string>("CheckInNote")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("check_in_note");
 
                     b.Property<DateTime?>("CheckInTime")
@@ -64,11 +64,11 @@ namespace DAL.Migrations
                         .HasColumnName("check_in_time");
 
                     b.Property<string>("CheckOutImages")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("check_out_images");
 
                     b.Property<string>("CheckOutNote")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("check_out_note");
 
                     b.Property<DateTime?>("CheckOutTime")
@@ -92,7 +92,7 @@ namespace DAL.Migrations
                     b.Property<string>("FacilityId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("facility_id");
 
                     b.Property<bool>("IsUsed")
@@ -102,15 +102,15 @@ namespace DAL.Migrations
                         .HasColumnName("is_used");
 
                     b.Property<string>("Purpose")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("purpose");
 
                     b.Property<string>("RejectionReason")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("rejection_reason");
 
                     b.Property<string>("SpecialRequirements")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("special_requirements");
 
                     b.Property<DateTime>("StartTime")
@@ -121,7 +121,7 @@ namespace DAL.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        
                         .HasDefaultValue("Pending_Approval")
                         .HasColumnName("status");
 
@@ -134,7 +134,7 @@ namespace DAL.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("user_id");
 
                     b.HasKey("BookingId");
@@ -152,17 +152,17 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("FeedbackId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("feedback_id");
 
                     b.Property<string>("BookingId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("booking_id");
 
                     b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("comments");
 
                     b.Property<DateTime>("CreatedAt")
@@ -172,7 +172,7 @@ namespace DAL.Migrations
                         .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<string>("IssueDescription")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("issue_description");
 
                     b.Property<int>("Rating")
@@ -192,7 +192,7 @@ namespace DAL.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("user_id");
 
                     b.HasKey("FeedbackId");
@@ -209,11 +209,11 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("CampusId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("campus_id");
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("address");
 
                     b.Property<DateTime>("CreatedAt")
@@ -224,29 +224,29 @@ namespace DAL.Migrations
 
                     b.Property<string>("Email")
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        
                         .HasColumnName("email");
 
                     b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("image_url");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        
                         .HasColumnName("name");
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        
                         .HasColumnName("phone_number");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        
                         .HasDefaultValue("Active")
                         .HasColumnName("status");
 
@@ -292,17 +292,17 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("FacilityId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("facility_id");
 
                     b.Property<string>("Amenities")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("amenities");
 
                     b.Property<string>("CampusId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("campus_id");
 
                     b.Property<int>("Capacity")
@@ -316,17 +316,17 @@ namespace DAL.Migrations
                         .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("description");
 
                     b.Property<string>("FacilityManagerId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("facility_manager_id");
 
                     b.Property<string>("FloorNumber")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
+                        
                         .HasColumnName("floor_number");
 
                     b.Property<int>("MaxConcurrentBookings")
@@ -338,26 +338,26 @@ namespace DAL.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        
                         .HasColumnName("name");
 
                     b.Property<string>("RoomNumber")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        
                         .HasColumnName("room_number");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        
                         .HasDefaultValue("Available")
                         .HasColumnName("status");
 
                     b.Property<string>("TypeId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("type_id");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -623,7 +623,7 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("TypeId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("type_id");
 
                     b.Property<DateTime>("CreatedAt")
@@ -633,29 +633,29 @@ namespace DAL.Migrations
                         .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<string>("DefaultAmenities")
-                        .HasColumnType("nvarchar(max)");
+                        ;
 
                     b.Property<int?>("DefaultCapacity")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("description");
 
                     b.Property<string>("IconUrl")
-                        .HasColumnType("nvarchar(max)");
+                        ;
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        
                         .HasColumnName("name");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        
                         .HasDefaultValue("Active")
                         .HasColumnName("status");
 
@@ -715,12 +715,12 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("NotificationId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("notification_id");
 
                     b.Property<string>("BookingId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("booking_id");
 
                     b.Property<DateTime>("CreatedAt")
@@ -731,12 +731,12 @@ namespace DAL.Migrations
 
                     b.Property<string>("FeedbackId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("feedback_id");
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("message");
 
                     b.Property<DateTime?>("ReadAt")
@@ -747,30 +747,30 @@ namespace DAL.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        
                         .HasDefaultValue("Unread")
                         .HasColumnName("status");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        
                         .HasColumnName("title");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        
                         .HasColumnName("type");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("user_id");
 
                     b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(6)");
+                        ;
 
                     b.HasKey("NotificationId");
 
@@ -793,7 +793,7 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("RoleId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("role_id");
 
                     b.Property<DateTime>("CreatedAt")
@@ -805,7 +805,7 @@ namespace DAL.Migrations
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        
                         .HasColumnName("role_name");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -846,7 +846,7 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("SettingKey")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        
                         .HasColumnName("setting_key");
 
                     b.Property<DateTime>("CreatedAt")
@@ -856,13 +856,13 @@ namespace DAL.Migrations
                         .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("description");
 
                     b.Property<string>("SettingValue")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
+                        
                         .HasColumnName("setting_value");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -883,11 +883,11 @@ namespace DAL.Migrations
                 {
                     b.Property<string>("UserId")
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("user_id");
 
                     b.Property<string>("AvatarUrl")
-                        .HasColumnType("nvarchar(max)")
+                        
                         .HasColumnName("avatar_url");
 
                     b.Property<DateTime>("CreatedAt")
@@ -898,12 +898,12 @@ namespace DAL.Migrations
 
                     b.Property<string>("Email")
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        
                         .HasColumnName("email");
 
                     b.Property<string>("EmailVerificationCode")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
+                        
                         .HasColumnName("email_verification_code");
 
                     b.Property<DateTime?>("EmailVerificationCodeExpiry")
@@ -913,14 +913,14 @@ namespace DAL.Migrations
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        
                         .HasColumnName("full_name");
 
                     b.Property<string>("IsVerify")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        
                         .HasDefaultValue("Unverified")
                         .HasColumnName("is_verify");
 
@@ -930,12 +930,12 @@ namespace DAL.Migrations
 
                     b.Property<string>("Password")
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        
                         .HasColumnName("password");
 
                     b.Property<string>("PasswordResetCode")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
+                        
                         .HasColumnName("password_reset_code");
 
                     b.Property<DateTime?>("PasswordResetCodeExpiry")
@@ -944,26 +944,26 @@ namespace DAL.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        
                         .HasColumnName("phone_number");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
                         .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)")
+                        
                         .HasColumnName("role_id");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        
                         .HasDefaultValue("Active")
                         .HasColumnName("status");
 
                     b.Property<string>("StudentId")
                         .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)")
+                        
                         .HasColumnName("student_id");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -974,7 +974,7 @@ namespace DAL.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        
                         .HasColumnName("user_name");
 
                     b.HasKey("UserId");
