@@ -1,4 +1,4 @@
-import { useState, useEffect, type ReactNode } from 'react';
+import React, { useState, useEffect, type ReactNode } from 'react';
 import { type AuthUser as LoginAuthUser, logoutAPI } from '../layout/Login/api/loginAPI';
 import { type AuthUser } from '../types';
 import { clearAuth } from '../utils/auth';

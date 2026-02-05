@@ -1,7 +1,5 @@
 // API Configuration
-// Use environment variable for production, fallback to localhost for development
-const baseURL = import.meta.env.VITE_BASE_URL || 'http://localhost:5252';
-export const API_BASE_URL = `${baseURL}/api`;
+export const API_BASE_URL = 'http://localhost:5252/api';
 
 // API Endpoints
 export const API_ENDPOINTS = {
@@ -132,7 +130,7 @@ export const apiFetch = async <T>(
       if (text) {
         try {
           data = JSON.parse(text);
-        } catch {
+        } catch (e) {
           return {
             success: false,
             error: {
