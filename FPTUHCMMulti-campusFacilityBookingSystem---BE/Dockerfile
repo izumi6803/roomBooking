@@ -2,17 +2,17 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy solution and project files
-COPY ["Controller/Controller.csproj", "Controller/"]
-COPY ["BLL/BLL.csproj", "BLL/"]
-COPY ["DAL/DAL.csproj", "DAL/"]
-COPY ["Applications/Applications.csproj", "Applications/"]
+# Copy solution and project files from backend directory
+COPY ["FPTUHCMMulti-campusFacilityBookingSystem---BE/Controller/Controller.csproj", "Controller/"]
+COPY ["FPTUHCMMulti-campusFacilityBookingSystem---BE/BLL/BLL.csproj", "BLL/"]
+COPY ["FPTUHCMMulti-campusFacilityBookingSystem---BE/DAL/DAL.csproj", "DAL/"]
+COPY ["FPTUHCMMulti-campusFacilityBookingSystem---BE/Applications/Applications.csproj", "Applications/"]
 
 # Restore dependencies
 RUN dotnet restore "Controller/Controller.csproj"
 
-# Copy everything else and build
-COPY . .
+# Copy everything else from backend directory and build
+COPY FPTUHCMMulti-campusFacilityBookingSystem---BE/ .
 WORKDIR "/src/Controller"
 RUN dotnet build "Controller.csproj" -c Release -o /app/build
 
