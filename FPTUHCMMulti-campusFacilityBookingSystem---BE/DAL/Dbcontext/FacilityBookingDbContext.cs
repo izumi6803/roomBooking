@@ -77,10 +77,10 @@ namespace DAL.Dbcontext
                     .IsRequired();
                 entity.Property(e => e.ImageUrl)
                     .HasColumnName("image_url")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.Address)
                     .HasColumnName("address")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.PhoneNumber)
                     .HasColumnName("phone_number")
                     .HasMaxLength(20);
@@ -147,7 +147,7 @@ namespace DAL.Dbcontext
                     .IsRequired();
                 entity.Property(e => e.Description)
                     .HasColumnName("description")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
                     .HasDefaultValueSql(utcNowSql);
@@ -218,7 +218,7 @@ namespace DAL.Dbcontext
                     .HasDefaultValue(VerificationStatus.Unverified);
                 entity.Property(e => e.AvatarUrl)
                     .HasColumnName("avatar_url")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.LastLogin)
                     .HasColumnName("last_login");
                 entity.Property(e => e.EmailVerificationCode)
@@ -309,7 +309,7 @@ namespace DAL.Dbcontext
                     .IsRequired();
                 entity.Property(e => e.Description)
                     .HasColumnName("description")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.Capacity)
                     .HasColumnName("capacity")
                     .IsRequired();
@@ -334,7 +334,7 @@ namespace DAL.Dbcontext
                     .HasDefaultValue(FacilityStatus.Available);
                 entity.Property(e => e.Amenities)
                     .HasColumnName("amenities")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.FacilityManagerId)
                     .HasColumnName("facility_manager_id")
                     .HasMaxLength(6);
@@ -423,7 +423,7 @@ namespace DAL.Dbcontext
                     .IsRequired();
                 entity.Property(e => e.Purpose)
                     .HasColumnName("purpose")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.Category)
                     .HasColumnName("category")
                     .HasMaxLength(100);
@@ -431,7 +431,7 @@ namespace DAL.Dbcontext
                     .HasColumnName("estimated_attendees");
                 entity.Property(e => e.SpecialRequirements)
                     .HasColumnName("special_requirements")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.Status)
                     .HasColumnName("status")
                     .HasMaxLength(50)
@@ -444,23 +444,23 @@ namespace DAL.Dbcontext
                     .HasColumnName("approved_at");
                 entity.Property(e => e.RejectionReason)
                     .HasColumnName("rejection_reason")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.CheckInTime)
                     .HasColumnName("check_in_time");
                 entity.Property(e => e.CheckInNote)
                     .HasColumnName("check_in_note")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.CheckInImages)
                     .HasColumnName("check_in_images")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.CheckOutTime)
                     .HasColumnName("check_out_time");
                 entity.Property(e => e.CheckOutNote)
                     .HasColumnName("check_out_note")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.CheckOutImages)
                     .HasColumnName("check_out_images")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.IsUsed)
                     .HasColumnName("is_used")
                     .HasDefaultValue(false);
@@ -468,7 +468,7 @@ namespace DAL.Dbcontext
                     .HasColumnName("cancelled_at");
                 entity.Property(e => e.CancellationReason)
                     .HasColumnName("cancellation_reason")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
                     .HasDefaultValueSql(utcNowSql);
@@ -517,16 +517,16 @@ namespace DAL.Dbcontext
                     .IsRequired();
                 entity.Property(e => e.Comments)
                     .HasColumnName("comments")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.ReportIssue)
                     .HasColumnName("report_issue")
                     .HasDefaultValue(false);
                 entity.Property(e => e.IssueDescription)
                     .HasColumnName("issue_description")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
                 entity.Property(e => e.ResolvedAt)
                     .HasColumnName("resolved_at");
 
@@ -571,7 +571,7 @@ namespace DAL.Dbcontext
                     .IsRequired();
                 entity.Property(e => e.Message)
                     .HasColumnName("message")
-                    .HasColumnType("nvarchar(MAX)")
+                    
                     .IsRequired();
                 entity.Property(e => e.Status)
                     .HasColumnName("status")
@@ -586,7 +586,7 @@ namespace DAL.Dbcontext
                     .HasMaxLength(6);
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql(utcNowSql);
                 entity.Property(e => e.ReadAt)
                     .HasColumnName("read_at");
 
@@ -629,7 +629,7 @@ namespace DAL.Dbcontext
                     .IsRequired();
                 entity.Property(e => e.Description)
                     .HasColumnName("description")
-                    .HasColumnType("nvarchar(MAX)");
+                    ;
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("created_at")
                     .HasDefaultValueSql(utcNowSql);
