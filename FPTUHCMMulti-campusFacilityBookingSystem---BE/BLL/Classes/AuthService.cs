@@ -90,7 +90,7 @@ namespace BLL.Classes
             }
 
             // Update last login
-            user.LastLogin = DateTimeHelper.VietnamNow;
+            user.LastLogin = DateTime.UtcNow;
             await _unitOfWork.UserRepo.UpdateAsync(user);
             await _unitOfWork.SaveChangesAsync();
 
@@ -147,7 +147,7 @@ namespace BLL.Classes
             }
 
             // Update last login
-            user.LastLogin = DateTimeHelper.VietnamNow;
+            user.LastLogin = DateTime.UtcNow;
             await _unitOfWork.UserRepo.UpdateAsync(user);
             await _unitOfWork.SaveChangesAsync();
 
