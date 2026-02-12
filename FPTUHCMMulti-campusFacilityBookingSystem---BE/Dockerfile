@@ -23,8 +23,7 @@ RUN dotnet publish "Controller.csproj" -c Release -o /app/publish /p:UseAppHost=
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-EXPOSE 8080
-ENV ASPNETCORE_URLS=http://0.0.0.0:8080
+# Railway will inject PORT env variable, Program.cs will read it
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Controller.dll"]
 
