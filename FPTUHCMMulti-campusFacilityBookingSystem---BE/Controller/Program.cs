@@ -9,6 +9,13 @@ using System.Text;
 using Controller.Converters;
 using Controller.Filters;
 
+// IMPORTANT: Set the port BEFORE creating the builder
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+Console.WriteLine($"=== PORT CONFIGURATION ===");
+Console.WriteLine($"PORT environment variable: {port}");
+Console.WriteLine($"Setting ASPNETCORE_URLS to: http://0.0.0.0:{port}");
+Environment.SetEnvironmentVariable("ASPNETCORE_URLS", $"http://0.0.0.0:{port}");
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure DbContext
@@ -246,11 +253,8 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Configure port for Railway/production deployment
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-Console.WriteLine($"Configuring to listen on port: {port}");
-app.Urls.Clear();
-app.Urls.Add($"http://0.0.0.0:{port}");
+// Port is already configured at the top of the file before builder creation
+// The app will automatically listen on the port set in ASPNETCORE_URLS
 
 // Configure the HTTP request pipeline.
 // Enable Swagger in production for API documentation
