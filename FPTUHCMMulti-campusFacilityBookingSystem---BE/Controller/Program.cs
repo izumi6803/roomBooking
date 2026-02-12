@@ -247,11 +247,10 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure port for Railway/production deployment
-var port = Environment.GetEnvironmentVariable("PORT");
-if (!string.IsNullOrEmpty(port))
-{
-    app.Urls.Add($"http://0.0.0.0:{port}");
-}
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+Console.WriteLine($"Configuring to listen on port: {port}");
+app.Urls.Clear();
+app.Urls.Add($"http://0.0.0.0:{port}");
 
 // Configure the HTTP request pipeline.
 // Enable Swagger in production for API documentation
