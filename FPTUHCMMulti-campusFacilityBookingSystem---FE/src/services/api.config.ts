@@ -1,66 +1,66 @@
 // API Configuration
 // Use environment variable for production, fallback to localhost for development
 const baseURL = import.meta.env.VITE_BASE_URL || 'http://localhost:5252';
-export const API_BASE_URL = `${baseURL}/api`;
+export const API_BASE_URL = baseURL;
 
 // API Endpoints
 export const API_ENDPOINTS = {
   // Auth
   AUTH: {
-    LOGIN: '/auth/login',
-    LOGOUT: '/auth/logout',
-    GOOGLE_LOGIN: '/auth/login/google',
-    VERIFY_EMAIL: '/auth/verify-email',
-    FORGOT_PASSWORD: '/auth/forgot-password',
-    RESET_PASSWORD: '/auth/reset-password',
+    LOGIN: '/api/auth/login',
+    LOGOUT: '/api/auth/logout',
+    GOOGLE_LOGIN: '/api/auth/login/google',
+    VERIFY_EMAIL: '/api/auth/verify-email',
+    FORGOT_PASSWORD: '/api/auth/forgot-password',
+    RESET_PASSWORD: '/api/auth/reset-password',
   },
   
   // Campus
   CAMPUS: {
-    GET_ALL: '/campuses',
-    GET_BY_ID: (id: string) => `/campuses/${id}`,
-    GET_FACILITIES: (campusId: string) => `/campuses/${campusId}/facilities`,
+    GET_ALL: '/api/campuses',
+    GET_BY_ID: (id: string) => `/api/campuses/${id}`,
+    GET_FACILITIES: (campusId: string) => `/api/campuses/${campusId}/facilities`,
   },
   
   // Facility
   FACILITY: {
-    GET_ALL: '/facilities',
-    GET_BY_ID: (id: string) => `/facilities/${id}`,
+    GET_ALL: '/api/facilities',
+    GET_BY_ID: (id: string) => `/api/facilities/${id}`,
   },
   
   // Booking
   BOOKING: {
-    GET_ALL: '/bookings',
-    GET_MY_BOOKINGS: '/bookings/me',
-    GET_BY_ID: (id: string) => `/bookings/${id}`,
-    CREATE: '/bookings',
-    UPDATE: (id: string) => `/bookings/${id}`,
-    SUBMIT: (id: string) => `/bookings/${id}/submit`,
-    CANCEL: (id: string) => `/bookings/${id}`,
-    CHECK_IN: (id: string) => `/bookings/${id}/check-in`,
-    CHECK_IN_WITH_IMAGES: (id: string) => `/bookings/${id}/check-in-with-images`,
-    CHECK_OUT: (id: string) => `/bookings/${id}/check-out`,
-    CHECK_OUT_WITH_IMAGES: (id: string) => `/bookings/${id}/check-out-with-images`,
+    GET_ALL: '/api/bookings',
+    GET_MY_BOOKINGS: '/api/bookings/me',
+    GET_BY_ID: (id: string) => `/api/bookings/${id}`,
+    CREATE: '/api/bookings',
+    UPDATE: (id: string) => `/api/bookings/${id}`,
+    SUBMIT: (id: string) => `/api/bookings/${id}/submit',
+    CANCEL: (id: string) => `/api/bookings/${id}`,
+    CHECK_IN: (id: string) => `/api/bookings/${id}/check-in`,
+    CHECK_IN_WITH_IMAGES: (id: string) => `/api/bookings/${id}/check-in-with-images`,
+    CHECK_OUT: (id: string) => `/api/bookings/${id}/check-out`,
+    CHECK_OUT_WITH_IMAGES: (id: string) => `/api/bookings/${id}/check-out-with-images`,
   },
   
   // Feedback
   FEEDBACK: {
-    GET_ALL: '/feedbacks',
-    GET_BY_ID: (id: string) => `/feedbacks/${id}`,
-    CREATE: '/feedbacks',
-    GET_FACILITY_RATING: (facilityId: string) => `/feedbacks/facility/${facilityId}/rating`,
+    GET_ALL: '/api/feedbacks',
+    GET_BY_ID: (id: string) => `/api/feedbacks/${id}`,
+    CREATE: '/api/feedbacks',
+    GET_FACILITY_RATING: (facilityId: string) => `/api/feedbacks/facility/${facilityId}/rating`,
   },
   
   // User
   USER: {
-    GET_ALL: '/users',
-    GET_BY_ID: (id: string) => `/users/${id}`,
-    GET_PROFILE: '/users/profile',
+    GET_ALL: '/api/users',
+    GET_BY_ID: (id: string) => `/api/users/${id}`,
+    GET_PROFILE: '/api/users/profile',
   },
   
   // System Settings
   SYSTEM_SETTINGS: {
-    GET: '/system-settings',
+    GET: '/api/system-settings',
   },
 };
 
