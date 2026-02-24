@@ -45,12 +45,19 @@ namespace Controller.Controllers
         [ProducesResponseType(typeof(ApiResponse<List<CampusResponseDto>>), 200)]
         public async Task<IActionResult> GetAll()
         {
+            _logger.LogInformation("=== GetAll Campuses START ===");
+            
             try
             {
-                _logger.LogInformation("=== GetAll Campuses START ===");
-                var result = await _campusService.GetAllCampusesAsync();
-                _logger.LogInformation($"=== GetAll Campuses SUCCESS: {result.Data?.Count ?? 0} campuses ===");
-                return Ok(result);
+                // TEMPORARY: Return hardcoded response to test if routing works
+                var testResponse = ApiResponse<List<CampusResponseDto>>.Ok(new List<CampusResponseDto>());
+                _logger.LogInformation("=== Returning hardcoded test response ===");
+                return Ok(testResponse);
+                
+                // Original code (commented out for debugging)
+                // var result = await _campusService.GetAllCampusesAsync();
+                // _logger.LogInformation($"=== GetAll Campuses SUCCESS: {result.Data?.Count ?? 0} campuses ===");
+                // return Ok(result);
             }
             catch (Exception ex)
             {
