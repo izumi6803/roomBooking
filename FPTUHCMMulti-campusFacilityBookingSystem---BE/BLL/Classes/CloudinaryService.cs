@@ -18,7 +18,10 @@ namespace BLL.Classes
 
             if (string.IsNullOrEmpty(cloudName) || string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(apiSecret))
             {
-                throw new InvalidOperationException("Cloudinary configuration is missing. Please check appsettings.json");
+                // Log warning but don't throw - allow app to start without Cloudinary
+                Console.WriteLine("WARNING: Cloudinary configuration is missing. Image upload will not work.");
+                _cloudinary = null!; // Set to null, methods will need to handle this
+                return;
             }
 
             var account = new Account(cloudName, apiKey, apiSecret);
