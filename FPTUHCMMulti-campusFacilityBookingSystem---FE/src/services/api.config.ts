@@ -36,7 +36,7 @@ export const API_ENDPOINTS = {
     GET_BY_ID: (id: string) => `/api/bookings/${id}`,
     CREATE: '/api/bookings',
     UPDATE: (id: string) => `/api/bookings/${id}`,
-    SUBMIT: (id: string) => `/api/bookings/${id}/submit',
+    SUBMIT: (id: string) => `/api/bookings/${id}/submit`,
     CANCEL: (id: string) => `/api/bookings/${id}`,
     CHECK_IN: (id: string) => `/api/bookings/${id}/check-in`,
     CHECK_IN_WITH_IMAGES: (id: string) => `/api/bookings/${id}/check-in-with-images`,
