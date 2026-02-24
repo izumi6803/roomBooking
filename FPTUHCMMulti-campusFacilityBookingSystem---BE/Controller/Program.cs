@@ -116,8 +116,6 @@ builder.Services.AddAuthentication(options =>
 });
 
 // Configure CORS
-// In production, update WithOrigins to include your Vercel frontend URL
-// Example: policy.WithOrigins("https://your-project.vercel.app", "http://localhost:5173")
 var allowedOrigins = builder.Configuration["AllowedOrigins"]?.Split(';') 
     ?? new[] { "http://localhost:5173", "http://localhost:3000" };
 
@@ -129,12 +127,23 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        // TEMPORARY: Allow all origins for debugging
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-        
-        Console.WriteLine("CORS: Allowing all origins (DEBUG MODE)");
+        if (builder.Environment.IsDevelopment())
+        {
+            // Development: Allow all origins
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+            Console.WriteLine("CORS: Allowing all origins (Development)");
+        }
+        else
+        {
+            // Production: Only allow specific origins
+            policy.WithOrigins(allowedOrigins)
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials();
+            Console.WriteLine($"CORS: Allowing specific origins: {string.Join(", ", allowedOrigins)}");
+        }
     });
 });
 
