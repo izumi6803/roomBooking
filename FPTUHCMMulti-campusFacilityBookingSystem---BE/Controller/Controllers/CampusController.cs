@@ -18,12 +18,14 @@ namespace Controller.Controllers
         private readonly ICampusService _campusService;
         private readonly IFacilityService _facilityService;
         private readonly ICloudinaryService _cloudinaryService;
+        private readonly ILogger<CampusController> _logger;
 
-        public CampusController(ICampusService campusService, IFacilityService facilityService, ICloudinaryService cloudinaryService)
+        public CampusController(ICampusService campusService, IFacilityService facilityService, ICloudinaryService cloudinaryService, ILogger<CampusController> logger)
         {
             _campusService = campusService;
             _facilityService = facilityService;
             _cloudinaryService = cloudinaryService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -45,22 +47,22 @@ namespace Controller.Controllers
         {
             try
             {
-                Console.WriteLine("=== GetAll Campuses START ===");
+                _logger.LogInformation("=== GetAll Campuses START ===");
                 var result = await _campusService.GetAllCampusesAsync();
-                Console.WriteLine($"=== GetAll Campuses SUCCESS: {result.Data?.Count ?? 0} campuses ===");
+                _logger.LogInformation($"=== GetAll Campuses SUCCESS: {result.Data?.Count ?? 0} campuses ===");
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"=== GetAll Campuses ERROR ===");
-                Console.WriteLine($"Exception Type: {ex.GetType().Name}");
-                Console.WriteLine($"Message: {ex.Message}");
-                Console.WriteLine($"StackTrace: {ex.StackTrace}");
+                _logger.LogError(ex, "=== GetAll Campuses ERROR ===");
+                _logger.LogError($"Exception Type: {ex.GetType().Name}");
+                _logger.LogError($"Message: {ex.Message}");
+                _logger.LogError($"StackTrace: {ex.StackTrace}");
                 if (ex.InnerException != null)
                 {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                    _logger.LogError($"Inner Exception: {ex.InnerException.Message}");
                 }
-                Console.WriteLine("=== END ERROR ===");
+                _logger.LogError("=== END ERROR ===");
                 return StatusCode(500, ApiResponse.Fail(500, ex.Message));
             }
         }
