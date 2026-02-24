@@ -45,11 +45,22 @@ namespace Controller.Controllers
         {
             try
             {
+                Console.WriteLine("=== GetAll Campuses START ===");
                 var result = await _campusService.GetAllCampusesAsync();
+                Console.WriteLine($"=== GetAll Campuses SUCCESS: {result.Data?.Count ?? 0} campuses ===");
                 return Ok(result);
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"=== GetAll Campuses ERROR ===");
+                Console.WriteLine($"Exception Type: {ex.GetType().Name}");
+                Console.WriteLine($"Message: {ex.Message}");
+                Console.WriteLine($"StackTrace: {ex.StackTrace}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
+                Console.WriteLine("=== END ERROR ===");
                 return StatusCode(500, ApiResponse.Fail(500, ex.Message));
             }
         }

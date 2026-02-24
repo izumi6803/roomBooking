@@ -121,25 +121,20 @@ builder.Services.AddAuthentication(options =>
 var allowedOrigins = builder.Configuration["AllowedOrigins"]?.Split(';') 
     ?? new[] { "http://localhost:5173", "http://localhost:3000" };
 
+Console.WriteLine($"=== CORS CONFIGURATION ===");
+Console.WriteLine($"Environment: {builder.Environment.EnvironmentName}");
+Console.WriteLine($"Allowed Origins: {string.Join(", ", allowedOrigins)}");
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        if (builder.Environment.IsDevelopment())
-        {
-            // Development: Allow all origins
-            policy.AllowAnyOrigin()
-                  .AllowAnyMethod()
-                  .AllowAnyHeader();
-        }
-        else
-        {
-            // Production: Only allow specific origins
-            policy.WithOrigins(allowedOrigins)
-                  .AllowAnyMethod()
-                  .AllowAnyHeader()
-                  .AllowCredentials();
-        }
+        // TEMPORARY: Allow all origins for debugging
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+        
+        Console.WriteLine("CORS: Allowing all origins (DEBUG MODE)");
     });
 });
 
