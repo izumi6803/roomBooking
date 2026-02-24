@@ -1,6 +1,7 @@
 // API Configuration
 // Use environment variable for production, fallback to localhost for development
-const baseURL = import.meta.env.VITE_BASE_URL || 'http://localhost:5252';
+// Remove trailing slash if present to avoid double slashes
+const baseURL = (import.meta.env.VITE_BASE_URL || 'http://localhost:5252').replace(/\/$/, '');
 export const API_BASE_URL = baseURL;
 
 // API Endpoints
