@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: roombooking_db
+    restart: always
+    environment:
+      POSTGRES_DB: FacilityBookingDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./FPTUHCMMulti-campusFacilityBookingSystem---BE
+      dockerfile: Dockerfile
+    container_name: roombooking_be
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://0.0.0.0:8080
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=FacilityBookingDB;Username=postgres;Password=${DB_PASSWORD}"
+      AllowedOrigins: "http://${VPS_IP};http://${VPS_IP}:80"
+      Jwt__Key: ${JWT_KEY}
+      Jwt__Issuer: "FPTUFacilityBookingSystem"
+      Jwt__Audience: "FPTUFacilityBookingSystem"
+      Google__ClientId: ${GOOGLE_CLIENT_ID}
+      Google__ClientSecret: ${GOOGLE_CLIENT_SECRET}
+      Cloudinary__CloudName: ${CLOUDINARY_CLOUD_NAME}
+      Cloudinary__ApiKey: ${CLOUDINARY_API_KEY}
+      Cloudinary__ApiSecret: ${CLOUDINARY_API_SECRET}
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./FPTUHCMMulti-campusFacilityBookingSystem---FE
+      dockerfile: Dockerfile
+      args:
+        VITE_BASE_URL: http://${VPS_IP}:8080
+        VITE_GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+    container_name: roombooking_fe
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+volumes:
+  pgdata:
+
+networks:
+  app-network:
+    driver: bridge
